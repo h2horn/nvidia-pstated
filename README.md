@@ -93,6 +93,43 @@ cmake -B build
 cmake --build build
 ```
 
+### Nix
+
+This project provides a Nix flake to build the binary:
+
+```sh
+nix build
+```
+
+**NixOS Module:**
+
+The flake also provides a NixOS module. To use it, add the flake to your inputs and import the module in your NixOS configuration.
+
+`flake.nix`:
+```nix
+{
+  inputs.nvidia-pstated.url = "github:sasha0552/nvidia-pstated";
+
+  outputs = { self, nixpkgs, nvidia-pstated }: {
+    nixosConfigurations.your-hostname = nixpkgs.lib.nixosSystem {
+      # ...
+      modules = [
+        ./configuration.nix
+        nvidia-pstated.nixosModules.default
+      ];
+    };
+  };
+}
+```
+
+`configuration.nix`:
+```nix
+{ config, pkgs, ... }: {
+  # ...
+  services.nvidia-pstated.enable = true;
+}
+```
+
 ## Misc
 
 ### Managing only specific GPUs
@@ -172,7 +209,7 @@ For example, I have a server fans connected to AC 220v -> DC 12v PSU. I'm using 
 `nvidia-pstated --disable-fan-script 'curl --output /dev/null --silent "http://x.x.x.x/cm?cmnd=POWER%20OFF"' --enable-fan-script 'curl --output /dev/null --silent "http://x.x.x.x/cm?cmnd=POWER%20ON"'`
 
 By default, nvidia-pstated:
-1. Disables the fans at startup 
+1. Disables the fans at startup
 2. Enables the fans when the GPUs are overheated (`--temperature-threshold`)
 3. Enables the fans when switching to high performance state
 4. Disables the fans when idling for 15 minutes (when not overheated)
