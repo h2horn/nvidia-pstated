@@ -1,0 +1,41 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1761597516,
+        "narHash": "sha256-wxX7u6D2rpkJLWkZ2E932SIvDJW8+ON/0Yy8+a5vsDU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "daf6dc47aa4b44791372d6139ab7b25269184d55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nvapi-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718895301,
+        "narHash": "sha256-XA3/Gttf4CQFMGbSz+Tp4E2tgunQbUKpd2bnJOFeO5k=",
+        "type": "tarball",
+        "url": "https://download.nvidia.com/XFree86/nvapi-open-source-sdk/R555-OpenSource.tar"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://download.nvidia.com/XFree86/nvapi-open-source-sdk/R555-OpenSource.tar"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "nvapi-src": "nvapi-src"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
