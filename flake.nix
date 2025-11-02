@@ -130,6 +130,18 @@
               default = "";
               description = "Script to run when enabling external fans";
             };
+
+            keepaliveFanScript = mkOption {
+              type = types.str;
+              default = "";
+              description = "Script to run periodically, with the intended state of the external fans";
+            };
+
+            iterationsBeforeKeepalive = mkOption {
+              type = types.int;
+              default = 10;
+              description = "Set the number of iterations to wait before executing keepalive script again";
+            };
           };
 
           config = mkIf config.services.nvidia-pstated.enable {
@@ -156,6 +168,8 @@
                       (toString config.services.nvidia-pstated.iterationsBeforeSwitch)
                       "--iterations-before-idle"
                       (toString config.services.nvidia-pstated.iterationsBeforeIdle)
+                      "--iterations-before-keepalive"
+                      (toString config.services.nvidia-pstated.iterationsBeforeKeepalive)
                     ]
                     ++ optional (config.services.nvidia-pstated.ids != "") [
                       "--ids"
@@ -168,6 +182,10 @@
                     ++ optional (config.services.nvidia-pstated.enableFanScript != "") [
                       "--enable-fan-script"
                       config.services.nvidia-pstated.enableFanScript
+                    ]
+                    ++ optional (config.services.nvidia-pstated.keepaliveFanScript != "") [
+                      "--keepalive-fan-script"
+                      config.services.nvidia-pstated.keepaliveFanScript
                     ];
                   in
                   "${config.services.nvidia-pstated.package}/bin/nvidia-pstated ${concatStringsSep " " args}";
