@@ -280,21 +280,23 @@ static int run(int argc, char * argv[]) {
       printf("Usage: %s [options]\n", argv[0]);
       printf("\n");
       printf("Options:\n");
-      printf("  -dfs, --disable-fan-script <value>        Script to run when the GPU fan should be disabled (default: none)\n");
-      printf("  -efs, --enable-fan-script <value>         Script to run when the GPU fan should be enabled (default: none)\n");
-      printf("  -i, --ids <value><,value...>              Set the GPU(s) to control (default: all)\n");
-      printf("  -ibi, --iterations-before-idle <value>    Set the number of iterations to wait before considering disabling the fan (default: %u)\n", ITERATIONS_BEFORE_IDLE);
-      printf("  -ibs, --iterations-before-switch <value>  Set the number of iterations to wait before switching states (default: %u)\n", ITERATIONS_BEFORE_SWITCH);
-      printf("  -psh, --performance-state-high <value>    Set the high performance state for the GPU (default: %u)\n", PERFORMANCE_STATE_HIGH);
-      printf("  -psl, --performance-state-low <value>     Set the low performance state for the GPU (default: %u)\n", PERFORMANCE_STATE_LOW);
+      printf("  -dfs, --disable-fan-script <value>          Script to run when the GPU fan should be disabled (default: none)\n");
+      printf("  -efs, --enable-fan-script <value>           Script to run when the GPU fan should be enabled (default: none)\n");
+      printf("  -i, --ids <value><,value...>                Set the GPU(s) to control (default: all)\n");
+      printf("  -ibi, --iterations-before-idle <value>      Set the number of iterations to wait before considering disabling the fan (default: %u)\n", ITERATIONS_BEFORE_IDLE);
+      printf("  -ibk, --iterations-before-keepalive <value> Set the number of iterations to wait before executing keepalive script again (default: %u)\n", ITERATIONS_BEFORE_KEEPALIVE);
+      printf("  -ibs, --iterations-before-switch <value>    Set the number of iterations to wait before switching states (default: %u)\n", ITERATIONS_BEFORE_SWITCH);
+      printf("  -kfs, --keepalive-fan-script <value>        Script to run periodically, with the intended state of the fan (default: none)\n");
+      printf("  -psh, --performance-state-high <value>      Set the high performance state for the GPU (default: %u)\n", PERFORMANCE_STATE_HIGH);
+      printf("  -psl, --performance-state-low <value>       Set the low performance state for the GPU (default: %u)\n", PERFORMANCE_STATE_LOW);
 
       #ifdef _WIN32
-        printf("  -s, --service                             Run as a Windows service\n");
+        printf("  -s, --service                               Run as a Windows service\n");
       #endif
 
-      printf("  -si, --sleep-interval <value>             Set the sleep interval in milliseconds between utilization checks (default: %u)\n", SLEEP_INTERVAL);
-      printf("  -tt, --temperature-threshold <value>      Set the temperature threshold in degrees C (default: %u)\n", TEMPERATURE_THRESHOLD);
-      printf("  -ut, --utilization-threshold <value>      Set the utilization threshold in percentage (default: %u)\n", UTILIZATION_THRESHOLD);
+      printf("  -si, --sleep-interval <value>               Set the sleep interval in milliseconds between utilization checks (default: %u)\n", SLEEP_INTERVAL);
+      printf("  -tt, --temperature-threshold <value>        Set the temperature threshold in degrees C (default: %u)\n", TEMPERATURE_THRESHOLD);
+      printf("  -ut, --utilization-threshold <value>        Set the utilization threshold in percentage (default: %u)\n", UTILIZATION_THRESHOLD);
 
       // Jump to the error handling code
       goto errored;
