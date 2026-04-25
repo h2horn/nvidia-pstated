@@ -2,7 +2,7 @@
   description = "A daemon that automatically manages the performance states of NVIDIA GPUs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nvapi-src = {
       url = "https://download.nvidia.com/XFree86/nvapi-open-source-sdk/R555-OpenSource.tar";
       flake = false;
@@ -35,7 +35,7 @@
 
         buildInputs = [
           pkgs.cudatoolkit
-          pkgs.linuxPackages.nvidia_x11
+          pkgs.linuxPackages.nvidia_x11_legacy535
         ];
 
         cmakeFlags = [
